@@ -1,2 +1,2 @@
 # SimpleTimer
-C++ Timer class made for measuring well... time.
+C++ Timer class made to measure well... time. 
