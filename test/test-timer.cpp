@@ -17,7 +17,7 @@ TEST_CASE("Timer basic tests.", "[timer][basics]")
 		REQUIRE(testTimer.getElapsedTime() == 0.0);
 	}
 
-	SECTION( "getElapsedTime() should return 0.0 when startTimer() was called and stopTimer() was not called after." )
+	SECTION( "getElapsedTime() should return 0.0 when startTimer() was called and stopTimer() was not." )
 	{
 		REQUIRE(testTimer.getElapsedTime() == 0.0);
 	}
@@ -29,7 +29,7 @@ TEST_CASE("Timer basic tests.", "[timer][basics]")
 		testTimer.stopTimer();
 
 		REQUIRE(testTimer.getElapsedTime() > 0.0);
-		SECTION( "getElapsedTime() should return approximately 1.0 after sleeping for 1000 milliseconds." )
+		SECTION( "getElapsedTime() should return approximately 1.0 after using waiting for approximately 1000 milliseconds." )
 		{
 			REQUIRE(testTimer.getElapsedTime() == Approx(1.0).margin(0.001));
 		}
