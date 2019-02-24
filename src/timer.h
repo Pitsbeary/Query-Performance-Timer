@@ -16,6 +16,7 @@ class QueryPerformanceTimer
 		inline void stopTimer();
 
 		double getElapsedTime();
+
 		double getCounterFrequency();
 
 	private:
@@ -35,7 +36,7 @@ void QueryPerformanceTimer::initFrequency()
 	LARGE_INTEGER li;
 	QueryPerformanceFrequency(&li);
 
-	counterFrequency = double(li.QuadPart);
+	counterFrequency = static_cast<double>(li.QuadPart);
 }
 
 void QueryPerformanceTimer::resetTimer()
