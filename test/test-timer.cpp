@@ -29,5 +29,4 @@ TEST_CASE("Timer precision tests.", "[timer][precision]")
 {
 
 
-
 }

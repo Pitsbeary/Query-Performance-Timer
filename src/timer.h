@@ -18,9 +18,10 @@ class QueryPerformanceTimer
 
 	private:
 		void getFrequency();
+		double getTimestampsDifference();
 };
 
-/* --PUBLIC-- */
+/* ---PUBLIC--- */
 
 QueryPerformanceTimer::QueryPerformanceTimer() : counterStartTimestamp(), counterEndTimestamp(), counterFrequency(0.0)
 {
@@ -39,10 +40,10 @@ inline void QueryPerformanceTimer::setEndTimestamp()
 
 double QueryPerformanceTimer::getElapsedTime()
 {
-	return static_cast<double>(counterEndTimestamp.QuadPart - counterStartTimestamp.QuadPart) / counterFrequency;
+	return getTimestampsDifference() / counterFrequency;
 }
 
-/* --PRIVATE-- */
+/* ---PRIVATE--- */
 
 void QueryPerformanceTimer::getFrequency()
 {
@@ -50,6 +51,11 @@ void QueryPerformanceTimer::getFrequency()
 	QueryPerformanceFrequency(&li);
 
 	counterFrequency = static_cast<double>(li.QuadPart);
+}
+
+double QueryPerformanceTimer::getTimestampsDifference()
+{
+    return static_cast<double>(counterEndTimestamp.QuadPart - counterStartTimestamp.QuadPart);
 }
 
 
