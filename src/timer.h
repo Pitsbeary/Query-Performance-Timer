@@ -4,72 +4,52 @@
 
 class QueryPerformanceTimer
 {
-	LARGE_INTEGER counterStart, counterStop;
+	LARGE_INTEGER counterStartTimestamp, counterEndTimestamp;
+
 	double counterFrequency;
 
 	public:
 		QueryPerformanceTimer();
 
-		void resetTimer();
-
-		inline void startTimer();
-		inline void stopTimer();
+		inline void setStartTimestamp();
+		inline void setEndTimestamp();
 
 		double getElapsedTime();
 
-		double getCounterFrequency();
-
 	private:
-		void initFrequency();
-
+		void getFrequency();
 };
 
-QueryPerformanceTimer::QueryPerformanceTimer()
-{
-	initFrequency();
+/* --PUBLIC-- */
 
-	resetTimer();
+QueryPerformanceTimer::QueryPerformanceTimer() : counterStartTimestamp(), counterEndTimestamp(), counterFrequency(0.0)
+{
+	getFrequency();
 }
 
-void QueryPerformanceTimer::initFrequency()
+inline void QueryPerformanceTimer::setStartTimestamp()
+{
+	QueryPerformanceCounter(&counterStartTimestamp);
+}
+
+inline void QueryPerformanceTimer::setEndTimestamp()
+{
+	QueryPerformanceCounter(&counterEndTimestamp);
+}
+
+double QueryPerformanceTimer::getElapsedTime()
+{
+	return static_cast<double>(counterEndTimestamp.QuadPart - counterStartTimestamp.QuadPart) / counterFrequency;
+}
+
+/* --PRIVATE-- */
+
+void QueryPerformanceTimer::getFrequency()
 {
 	LARGE_INTEGER li;
 	QueryPerformanceFrequency(&li);
 
 	counterFrequency = static_cast<double>(li.QuadPart);
-}
-
-void QueryPerformanceTimer::resetTimer()
-{
-	LARGE_INTEGER li;
-	QueryPerformanceCounter(&li);
-
-	counterStop = counterStart = li;
-}
-
-inline void QueryPerformanceTimer::startTimer()
-{
-	QueryPerformanceCounter(&counterStart);
-}
-
-inline void QueryPerformanceTimer::stopTimer()
-{
-	QueryPerformanceCounter(&counterStop);
-}
-
-double QueryPerformanceTimer::getElapsedTime()
-{
-	if(counterStart.QuadPart > counterStop.QuadPart)
-	{
-		return 0.0;
-	}
-
-	return static_cast<double>(counterStop.QuadPart - counterStart.QuadPart) / counterFrequency;
-}
-
-double QueryPerformanceTimer::getCounterFrequency()
-{
-	return counterFrequency;
 }
 
 
