@@ -18,7 +18,8 @@ class QueryPerformanceTimer
 
 	private:
 		void getFrequency();
-		double getTimestampsDifference();
+
+		inline double getTimestampsDifference();
 };
 
 /* ---PUBLIC--- */
@@ -53,7 +54,7 @@ void QueryPerformanceTimer::getFrequency()
 	counterFrequency = static_cast<double>(li.QuadPart);
 }
 
-double QueryPerformanceTimer::getTimestampsDifference()
+inline double QueryPerformanceTimer::getTimestampsDifference()
 {
     return static_cast<double>(counterEndTimestamp.QuadPart - counterStartTimestamp.QuadPart);
 }
