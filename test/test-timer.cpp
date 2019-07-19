@@ -16,17 +16,11 @@ TEST_CASE("Timer basic tests.", "[timer][basics]")
 		REQUIRE(testTimer.getElapsedTime() <= 0.0);
 	}
 
-	SECTION( "getElapsedTime() should return value greater or equal than 0.0 when setStartTimestamp() and setEndTimestamp() were called correctly." )
+	SECTION( "getElapsedTime() should return value greater or equal than 0.0 when setStartTimestamp() and setEndTimestamp() were correctly called after each other." )
 	{
 		testTimer.setStartTimestamp();
 		testTimer.setEndTimestamp();
 
 		REQUIRE(testTimer.getElapsedTime() >= 0.0);
 	}
-}
-
-TEST_CASE("Timer precision tests.", "[timer][precision]")
-{
-
-
 }
