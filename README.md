@@ -1,6 +1,4 @@
 # SimpleTimer
-C++ Timer class written to measure... well... time.
+C++ Timer based on QueryPerformanceCounter timestamps.
 
-- [x] create timer class
-- [x] create tests
-- [ ] provide some examples
+
